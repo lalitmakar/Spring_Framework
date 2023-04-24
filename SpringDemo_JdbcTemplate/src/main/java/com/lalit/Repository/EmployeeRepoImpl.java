@@ -65,7 +65,7 @@ public class EmployeeRepoImpl implements  EmployeeRepo{
     @Override
     public Employee getEmployee(String email_id) {
         Employee resEmp = null;
-        String query = "SELECT first_name, middle_name, last_name, DOJ, email_id FROM EMPLOYEE where email_id=:email LIMIT 1";
+        String query = "SELECT first_name, middle_name, last_name, DOJ, email_id FROM EMPLOYEE where email_id=:email LIMIT 1"; // llok at the parameter its not ? its :email, this email is used in map below
 
         Map<String,Object> map = new HashMap<>();
         map.put("email",email_id);
@@ -87,7 +87,7 @@ public class EmployeeRepoImpl implements  EmployeeRepo{
         });
 
 
-//        resEmp = jdbcTemplate.query(query, new ResultSetExtractor<Employee>() {
+//        resEmp = jdbcTemplate.query(query, new ResultSetExtractor<Employee>() {   //ResultSetExtractor is used to get one row as opposed to RowMapper
 //            @Override
 //            public Employee extractData(ResultSet res) throws SQLException, DataAccessException {
 //                Employee emp = null;
@@ -130,7 +130,7 @@ public class EmployeeRepoImpl implements  EmployeeRepo{
         List<Employee> listOfEmployee = null;
         String query = "SELECT first_name, middle_name, last_name, DOJ, email_id FROM EMPLOYEE";
 
-        listOfEmployee = jdbcTemplate.query(query, new RowMapper<Employee>() {
+        listOfEmployee = jdbcTemplate.query(query, new RowMapper<Employee>() { //RowMapper automatically add the returned obj to the list, rowMapper's return type is list
             @Override
             public Employee mapRow(ResultSet res, int rowNum) throws SQLException {
                 Employee emp = new Employee(res.getString("first_name"),res.getString("middle_name"),
