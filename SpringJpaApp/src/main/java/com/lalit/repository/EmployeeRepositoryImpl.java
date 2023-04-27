@@ -29,7 +29,7 @@ public class EmployeeRepositoryImpl implements  EmployeeRepository{
     }
 
     @Override
-    @Transactional(value = "jpaTransactionManager",rollbackFor = DummyCheckedExp.class) //for this exp rollback is happenning
+    @Transactional(value = "jpaTransactionManager",rollbackFor = DummyCheckedExp.class) //for this exp rollback is happenning, if entity is fetched from db then its not rollbacking...
     public int addEmloyeeWithCheckedExp(Employee emp) throws DummyCheckedExp {
         EmployeeEntity entity = convertBeanToEntity(emp);
         System.out.println(entity);
@@ -51,7 +51,7 @@ public class EmployeeRepositoryImpl implements  EmployeeRepository{
     }
 
     @Override
-    public int addEmloyeeWithUnCheckedExp(Employee emp){ //automatically rollback happens for unchecked exp, but when wrote query for fetching it is not rollbacking, entry is made in db
+    public int addEmloyeeWithUnCheckedExp(Employee emp){ //automatically rollback happens for unchecked exp, but when wrote query for fetching, it is not rollbacking, entry is made in db
         EmployeeEntity entity = convertBeanToEntity(emp);
         System.out.println(entity);
         entityManager.persist(entity);
