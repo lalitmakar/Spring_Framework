@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
-@Controller
+@Controller    // should have used RestController but just to demonstrate we have used controller
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmployeeApi {
 
