@@ -1,5 +1,9 @@
 package com.lalit.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
@@ -10,7 +14,9 @@ public class Employee {
     private String middleName;
     private String lastName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // this is the format of date in incoming request
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // this is the format of date in incoming FORM request || this is for form backing objcets
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)  // this is for request coming in json
     private LocalDate DOB;
     private String emailId;
 
